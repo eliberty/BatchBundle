@@ -2,8 +2,6 @@
 
 namespace Akeneo\Bundle\BatchBundle\Monolog\Handler;
 
-use Monolog\Handler\BatchLogHandler;
-
 /**
  * Write the log into a separate log file
  *
@@ -22,24 +20,16 @@ class NullableLogHandler extends BatchLogHandler
     protected $isEnabledLog;
 
     /**
-     * @param int             $level          The minimum logging level at which this handler will be triggered
-     * @param Boolean         $bubble         Whether the messages that are handled can bubble up the stack or not
-     * @param int|null        $filePermission Optional file permissions (default (0644) are only for owner read/write)
-     * @param Boolean         $useLocking     Try to lock log file before doing any writes
      * @param string          $logDir         Batch log directory
      * @param Boolean         $isEnabledLog   Defined if we do use logs of BatchLogHandler
      */
     public function __construct(
-        $level = Logger::DEBUG,
-        $bubble = true,
-        $filePermission = null,
-        $useLocking = false,
         $logDir,
         $isEnabledLog = true
     ) {
         $this->isEnabledLog = $isEnabledLog;
         if($this->isEnabledLog) {
-            parent::__construct($level, $bubble, $filePermission, $useLocking, $logDir);
+            parent::__construct($logDir);
         }
     }
 
